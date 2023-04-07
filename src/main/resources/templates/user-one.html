@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View User</title>
+    <meta charset="UTF-8">
+</head>
+<body>
+<h1>User Details</h1>
+<h3 th:if="${message!=null}" th:text="${message}">Message</h3>
+<table>
+        <tr>
+        <th>username:</th>
+                <td th:text="${entity.username}"></td>
+            </tr>
+        <tr>
+        <th>password:</th>
+                <td th:text="${entity.password}"></td>
+            </tr>
+        <tr>
+        <th>firstname:</th>
+                <td th:text="${entity.firstname}"></td>
+            </tr>
+        <tr>
+        <th>lastname:</th>
+                <td th:text="${entity.lastname}"></td>
+            </tr>
+        <tr>
+        <th>email:</th>
+                <td th:text="${entity.email}"></td>
+            </tr>
+        <tr>
+        <th>image:</th>
+                <td th:text="${entity.image}"></td>
+            </tr>
+        <tr>
+        <th>address:</th>
+                <td th:text="${entity.address}"></td>
+            </tr>
+        <tr>
+        <th>favouritesItems:</th>
+                <td>
+            <ul>
+                <li th:each="favouritesItems_item : ${entity.favouritesItems}" th:text="${favouritesItems_item}"></li>
+            </ul>
+        </td>
+            </tr>
+        <tr>
+        <th>featureItems:</th>
+                <td>
+            <ul>
+                <li th:each="featureItems_item : ${entity.featureItems}" th:text="${featureItems_item}"></li>
+            </ul>
+        </td>
+            </tr>
+        <tr>
+        <th>inprogresItems:</th>
+                <td>
+            <ul>
+                <li th:each="inprogresItems_item : ${entity.inprogresItems}" th:text="${inprogresItems_item}"></li>
+            </ul>
+        </td>
+            </tr>
+        <tr>
+        <th>watchedItems:</th>
+                <td>
+            <ul>
+                <li th:each="watchedItems_item : ${entity.watchedItems}" th:text="${watchedItems_item}"></li>
+            </ul>
+        </td>
+            </tr>
+        <tr>
+        <th>roles:</th>
+                <td>
+            <ul>
+                <li th:each="roles_item : ${entity.roles}" th:text="${roles_item}"></li>
+            </ul>
+        </td>
+            </tr>
+    
+
+</table>
+<br>
+<a th:href="@{/user}">Back to the List</a>
+<a th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>
+<form th:if="${entity.id!=null}" method="get"
+         th:action="'/user/'
+               + ${entity.id} + '/delete'">
+    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+</form>
+</body>
+</html>
