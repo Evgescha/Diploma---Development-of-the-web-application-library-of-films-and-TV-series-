@@ -4,6 +4,7 @@ import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.service.ItemService;
 import com.hescha.cinemalibrary.service.RoleService;
+import com.hescha.cinemalibrary.service.SecurityService;
 import com.hescha.cinemalibrary.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class UserController {
     public static final String REDIRECT_TO_ALL_ITEMS = "redirect:" + CURRENT_ADDRESS;
 
     private final UserService service;
-
+    private final SecurityService securityService;
     private final ItemService itemService;
     private final RoleService roleService;
     @Autowired
@@ -47,6 +48,12 @@ public class UserController {
     @GetMapping("/{id}")
     public String read(@PathVariable("id") Long id, Model model) {
         model.addAttribute("entity", service.read(id));
+        return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
+    }
+
+    @GetMapping("/profile")
+    public String profile(Model model) {
+        model.addAttribute("entity", securityService.getLoggedIn());
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
     }
 

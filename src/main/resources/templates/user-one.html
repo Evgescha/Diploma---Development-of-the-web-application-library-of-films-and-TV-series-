@@ -34,30 +34,22 @@
 
                                 <div class="card-text">
                                     <h6>Favourites Items:</h6>
-                                    <ul>
-                                        <li th:each="item : ${entity.favouritesItems}" th:text="${item.name}">Item Name</li>
-                                    </ul>
+                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.favouritesItems})}"></div>
                                 </div>
 
                                 <div class="card-text">
                                     <h6>Feature Items:</h6>
-                                    <ul>
-                                        <li th:each="item : ${entity.featureItems}" th:text="${item.name}">Item Name</li>
-                                    </ul>
+                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.featureItems})}"></div>
                                 </div>
 
                                 <div class="card-text">
                                     <h6>In Progress Items:</h6>
-                                    <ul>
-                                        <li th:each="item : ${entity.inprogresItems}" th:text="${item.name}">Item Name</li>
-                                    </ul>
+                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.inprogresItems})}"></div>
                                 </div>
 
                                 <div class="card-text">
                                     <h6>Watched Items:</h6>
-                                    <ul>
-                                        <li th:each="item : ${entity.watchedItems}" th:text="${item.name}">Item Name</li>
-                                    </ul>
+                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.watchedItems})}"></div>
                                 </div>
 
                                 <a th:href="'/user/edit/'+${entity.id}" class="filter__btn">Edit Profile</a>

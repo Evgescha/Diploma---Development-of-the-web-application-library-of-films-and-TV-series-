@@ -2,7 +2,9 @@ package com.hescha.cinemalibrary.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
+import lombok.NonNull;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -13,6 +15,7 @@ import java.util.Set;
 @Table(name = "myUser")
 @Entity
 public class User extends AbstractEntity {
+    @Column(unique = true)
     private String username;
     @JsonIgnore
     private String password;
