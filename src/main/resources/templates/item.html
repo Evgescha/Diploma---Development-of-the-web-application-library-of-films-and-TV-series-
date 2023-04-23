@@ -42,10 +42,26 @@
                             <div class="filter__item" id="filter__genre">
                                 <span class="filter__item-label">GENRE:</span>
 
-                                <select class="filter__item-select" name="genreId" required>
-                                    <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
-                                </select>
+                                <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <input type="button" value="Select Genre">
+                                    <span></span>
+                                </div>
+
+                                <ul class="filter__item-menu dropdown-menu scrollbar-dropdown mCustomScrollbar" aria-labelledby="filter-genre" style="overflow: visible; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);" x-placement="bottom-start">
+                                    <li th:each="genre : ${genres}" th:data-v="${genre.id}" th:text="${genre.name}" onclick="updateGenreSelection(this)"></li>
+                                </ul>
+                                <input type="hidden" name="genreId" required>
                             </div>
+                            <script>
+                                function updateGenreSelection(genreElement) {
+                                    const genreDropdown = document.getElementById("filter-genre");
+                                    const genreInput = document.querySelector("input[name='genreId']");
+
+                                    genreDropdown.querySelector("input[type='button']").value = genreElement.textContent;
+                                    genreInput.value = genreElement.getAttribute("data-v");
+                                }
+                            </script>
+
                             <!-- end filter item -->
 
                             <!-- filter item -->
@@ -67,7 +83,9 @@
             </div>
         </div>
     </div>
+
 </div>
+
 
 <!-- end filter -->
 
@@ -91,10 +109,11 @@
 
                         <div class="col-12 col-sm-8">
                             <div class="card__content">
-                                <h3 class="card__title"><a th:href="'/item/'+${entity.id}" th:text="${entity.name}">I Dream in Another Language</a></h3>
+                                <h3 class="card__title"><a th:href="'/item/'+${entity.id}" th:text="${entity.name}">I
+                                    Dream in Another Language</a></h3>
                                 <span class="card__category">
-												<a href="#" th:each="genre:${entity.genres}" th:text="${genre.name}">Action</a>
-											</span>
+                                    <a href="#" th:each="genre:${entity.genres}" th:text="${genre.name}">Action</a>
+                                </span>
 
                                 <div class="card__wrap">
                                     <ul class="card__list">
@@ -104,7 +123,11 @@
                                 </div>
 
                                 <div class="card__description">
-                                    <p th:text="${entity.description}">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                                    <p th:text="${entity.description}">It is a long established fact that a reader will
+                                        be distracted by the readable content of a page when looking at its layout. The
+                                        point of using Lorem Ipsum is that it has a more-or-less normal distribution of
+                                        letters, as opposed to using 'Content here, content here', making it look like
+                                        readable English.</p>
                                 </div>
                             </div>
                         </div>
@@ -117,14 +140,16 @@
             <div class="col-12" th:if="${paged}">
                 <ul class="paginator paginator--list">
                     <li class="paginator__item paginator__item--prev" th:if="${list.number > 0}">
-                        <a th:href="@{${#request.getRequestURL()}(page=${list.number})}"><i class="icon ion-ios-arrow-back"></i></a>
+                        <a th:href="@{${#request.getRequestURL()}(page=${list.number})}"><i
+                                class="icon ion-ios-arrow-back"></i></a>
                     </li>
                     <li class="paginator__item" th:each="page : ${#numbers.sequence(1, list.totalPages)}">
                         <a th:href="@{${#request.getRequestURL()}(page=${page})}"
                            th:class="${page == list.number + 1}? 'paginator__item--active' : ''" th:text="${page}"></a>
                     </li>
                     <li class="paginator__item paginator__item--next" th:if="${list.number + 1 < list.totalPages}">
-                        <a th:href="@{${#request.getRequestURL()}(page=${list.number + 2})}"><i class="icon ion-ios-arrow-forward"></i></a>
+                        <a th:href="@{${#request.getRequestURL()}(page=${list.number + 2})}"><i
+                                class="icon ion-ios-arrow-forward"></i></a>
                     </li>
                 </ul>
             </div>
@@ -136,61 +161,9 @@
 <!-- end catalog -->
 
 <div th:replace="~{/commons/footer :: footer}"></div>
+
+
 </body>
 
 </html>
 
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <title>List of Item</title>-->
-<!--    <meta charset="UTF-8">-->
-<!--</head>-->
-<!--<body>-->
-<!--<h1>List of Item</h1>-->
-<!--<h3 th:if="${message != null}" th:text="${message}">Message</h3>-->
-<!--<a th:href="@{/item/edit}">Create new Item</a>-->
-<!--<table>-->
-<!--    <thead>-->
-<!--    <tr>-->
-<!--        <th>name</th>-->
-<!--        <th>description</th>-->
-<!--        <th>type</th>-->
-<!--        <th>duration</th>-->
-<!--        <th>seriesCount</th>-->
-<!--        <th>releaseYear</th>-->
-<!--        <th>image</th>-->
-<!--        <th>genres</th>-->
-<!--        <th>comments</th>-->
-
-<!--        <th>Action</th>-->
-<!--    </tr>-->
-<!--    </thead>-->
-<!--    <tbody>-->
-<!--        <tr th:each="entity : ${list}">-->
-<!--                                    <td th:text=${entity.name}></td>-->
-<!--                                            <td th:text=${entity.description}></td>-->
-<!--                                            <td th:text=${entity.type}></td>-->
-<!--                                            <td th:text=${entity.duration}></td>-->
-<!--                                            <td th:text=${entity.seriesCount}></td>-->
-<!--                                            <td th:text=${entity.releaseYear}></td>-->
-<!--                                            <td th:text=${entity.image}></td>-->
-<!--                                            <td>-->
-<!--                    <ul>-->
-<!--                        <li th:each="genres_item : ${entity.genres}" th:text="${genres_item}"></li>-->
-<!--                    </ul>-->
-<!--                </td>-->
-<!--                                            <td>-->
-<!--                    <ul>-->
-<!--                        <li th:each="comments_item : ${entity.comments}" th:text="${comments_item}"></li>-->
-<!--                    </ul>-->
-<!--                </td>-->
-<!--                -->
-<!--    </tr>-->
-<!--    </tbody>-->
-<!--</table>-->
-<!--</body>-->
-<!--</html>-->

@@ -46,7 +46,7 @@ public class ItemController {
 
     @GetMapping("/filter")
     public String filter(@RequestParam("searchPhrase") String searchPhrase,
-                         @RequestParam(value = "genreId") Integer genreId,
+                         @RequestParam(value = "genreId", required = false) Integer genreId,
                          Model model) {
         List<Item> filteredItems;
 
