@@ -7,13 +7,8 @@ import com.hescha.cinemalibrary.service.CommentService;
 import com.hescha.cinemalibrary.service.GenreService;
 import com.hescha.cinemalibrary.service.ItemService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.stereotype.Controller;
 
@@ -36,8 +31,9 @@ public class ItemController {
     private final CommentService commentService;
 
     @GetMapping
-    public String readAll(Model model) {
-        model.addAttribute("list", service.readAll());
+    public String readAll(@RequestParam(name = "page", defaultValue = "1", required = false) Integer page, Model model) {
+        model.addAttribute("list", service.readPage(page));
+        model.addAttribute("paged", "true");
         return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
     }
 
@@ -46,6 +42,12 @@ public class ItemController {
         model.addAttribute("entity", service.read(id));
         model.addAttribute("randomList", service.findTwoRandomItems());
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam("searchPhrase") String searchPhrase, Model model) {
+        model.addAttribute("list", service.findByNameContainsOrDescriptionContains(searchPhrase));
+        return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
     }
 
     @GetMapping(path = {"/edit", "/edit/{id}"})

@@ -1,60 +1,287 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>List of Item</title>
-    <meta charset="UTF-8">
-</head>
-<body>
-<h1>List of Item</h1>
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<a th:href="@{/item/edit}">Create new Item</a>
-<table>
-    <thead>
-    <tr>
-        <th>name</th>
-        <th>description</th>
-        <th>type</th>
-        <th>duration</th>
-        <th>seriesCount</th>
-        <th>releaseYear</th>
-        <th>image</th>
-        <th>genres</th>
-        <th>comments</th>
+<html lang="en">
 
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.name}></td>
-                                            <td th:text=${entity.description}></td>
-                                            <td th:text=${entity.type}></td>
-                                            <td th:text=${entity.duration}></td>
-                                            <td th:text=${entity.seriesCount}></td>
-                                            <td th:text=${entity.releaseYear}></td>
-                                            <td th:text=${entity.image}></td>
-                                            <td>
-                    <ul>
-                        <li th:each="genres_item : ${entity.genres}" th:text="${genres_item}"></li>
+<head>
+    <title>Catalog</title>
+    <div th:replace="~{/commons/head :: head}"></div>
+</head>
+<body class="body">
+
+<div th:replace="~{/commons/header :: header}"></div>
+<!-- page title -->
+<section class="section section--first section--bg" data-bg="/img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section__wrap">
+                    <!-- section title -->
+                    <h2 class="section__title">Catalog list</h2>
+                    <!-- end section title -->
+
+                    <!-- breadcrumb -->
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb__item"><a href="#">Home</a></li>
+                        <li class="breadcrumb__item breadcrumb__item--active">Catalog list</li>
                     </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="comments_item : ${entity.comments}" th:text="${comments_item}"></li>
-                    </ul>
-                </td>
-                
-        <td>
-            <a th:href="@{/item/{id}(id=${entity.id})}">See detail</a>
-            <a th:href="@{/item/edit/{id}(id=${entity.id})}">Edit</a>
-            <form th:if="${entity.id!=null}" method="get"
-                  th:action="'/item/'
-                  +${entity.id}+'/delete'">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+                    <!-- end breadcrumb -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end page title -->
+
+<!-- filter -->
+<div class="filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="filter__content">
+                    <div class="filter__items">
+                        <!-- filter item -->
+                        <div class="filter__item" id="filter__genre">
+                            <span class="filter__item-label">GENRE:</span>
+
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-genre" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="button" value="Action/Adventure">
+                                <span></span>
+                            </div>
+
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-genre">
+                                <li>Action/Adventure</li>
+                                <li>Animals</li>
+                                <li>Animation</li>
+                                <li>Biography</li>
+                                <li>Comedy</li>
+                                <li>Cooking</li>
+                                <li>Dance</li>
+                                <li>Documentary</li>
+                                <li>Drama</li>
+                                <li>Education</li>
+                                <li>Entertainment</li>
+                                <li>Family</li>
+                                <li>Fantasy</li>
+                                <li>History</li>
+                                <li>Horror</li>
+                                <li>Independent</li>
+                                <li>International</li>
+                                <li>Kids</li>
+                                <li>Kids & Family</li>
+                                <li>Medical</li>
+                                <li>Military/War</li>
+                                <li>Music</li>
+                                <li>Musical</li>
+                                <li>Mystery/Crime</li>
+                                <li>Nature</li>
+                                <li>Paranormal</li>
+                                <li>Politics</li>
+                                <li>Racing</li>
+                                <li>Romance</li>
+                                <li>Sci-Fi/Horror</li>
+                                <li>Science</li>
+                                <li>Science Fiction</li>
+                                <li>Science/Nature</li>
+                                <li>Spanish</li>
+                                <li>Travel</li>
+                                <li>Western</li>
+                            </ul>
+                        </div>
+                        <!-- end filter item -->
+
+                        <!-- filter item -->
+                        <div class="filter__item" id="filter__quality">
+                            <span class="filter__item-label">QUALITY:</span>
+
+                            <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-quality" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <input type="button" value="HD 1080">
+                                <span></span>
+                            </div>
+
+                            <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-quality">
+                                <li>HD 1080</li>
+                                <li>HD 720</li>
+                                <li>DVD</li>
+                                <li>TS</li>
+                            </ul>
+                        </div>
+                        <!-- end filter item -->
+
+                        <!-- filter item -->
+                        <div class="filter__item" id="filter__rate">
+                            <span class="filter__item-label">IMBd:</span>
+
+                            <div class="filter__item-btn dropdown-toggle" role="button" id="filter-rate" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="filter__range">
+                                    <div id="filter__imbd-start"></div>
+                                    <div id="filter__imbd-end"></div>
+                                </div>
+                                <span></span>
+                            </div>
+
+                            <div class="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-rate">
+                                <div id="filter__imbd"></div>
+                            </div>
+                        </div>
+                        <!-- end filter item -->
+
+                        <!-- filter item -->
+                        <div class="filter__item" id="filter__year">
+                            <span class="filter__item-label">RELEASE YEAR:</span>
+
+                            <div class="filter__item-btn dropdown-toggle" role="button" id="filter-year" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="filter__range">
+                                    <div id="filter__years-start"></div>
+                                    <div id="filter__years-end"></div>
+                                </div>
+                                <span></span>
+                            </div>
+
+                            <div class="filter__item-menu filter__item-menu--range dropdown-menu" aria-labelledby="filter-year">
+                                <div id="filter__years"></div>
+                            </div>
+                        </div>
+                        <!-- end filter item -->
+                    </div>
+
+                    <!-- filter btn -->
+                    <button class="filter__btn" type="button">apply filter</button>
+                    <!-- end filter btn -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end filter -->
+
+<!-- catalog -->
+<div class="catalog">
+    <div class="container">
+        <div class="row">
+
+            <!-- card -->
+            <div class="col-6 col-sm-12 col-lg-6" th:each="entity:${list}">
+                <div class="card card--list">
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="card__cover">
+                                <img th:src="${entity.image}" alt="Item image">
+                                <a th:href="'/item/'+${entity.id}" class="card__play">
+                                    <i class="icon ion-ios-play"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-8">
+                            <div class="card__content">
+                                <h3 class="card__title"><a th:href="'/item/'+${entity.id}" th:text="${entity.name}">I Dream in Another Language</a></h3>
+                                <span class="card__category">
+												<a href="#" th:each="genre:${entity.genres}" th:text="${genre.name}">Action</a>
+											</span>
+
+                                <div class="card__wrap">
+                                    <ul class="card__list">
+                                        <li>HD</li>
+                                        <li>16+</li>
+                                    </ul>
+                                </div>
+
+                                <div class="card__description">
+                                    <p th:text="${entity.description}">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end card -->
+
+            <!-- paginator -->
+            <div class="col-12" th:if="${paged}">
+                <ul class="paginator paginator--list">
+                    <li class="paginator__item paginator__item--prev" th:if="${list.number > 0}">
+                        <a th:href="@{${#request.getRequestURL()}(page=${list.number})}"><i class="icon ion-ios-arrow-back"></i></a>
+                    </li>
+                    <li class="paginator__item" th:each="page : ${#numbers.sequence(1, list.totalPages)}">
+                        <a th:href="@{${#request.getRequestURL()}(page=${page})}"
+                           th:class="${page == list.number + 1}? 'paginator__item--active' : ''" th:text="${page}"></a>
+                    </li>
+                    <li class="paginator__item paginator__item--next" th:if="${list.number + 1 < list.totalPages}">
+                        <a th:href="@{${#request.getRequestURL()}(page=${list.number + 2})}"><i class="icon ion-ios-arrow-forward"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- end paginator -->
+        </div>
+    </div>
+</div>
+<!-- end catalog -->
+
+<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
+
 </html>
+
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <title>List of Item</title>-->
+<!--    <meta charset="UTF-8">-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>List of Item</h1>-->
+<!--<h3 th:if="${message != null}" th:text="${message}">Message</h3>-->
+<!--<a th:href="@{/item/edit}">Create new Item</a>-->
+<!--<table>-->
+<!--    <thead>-->
+<!--    <tr>-->
+<!--        <th>name</th>-->
+<!--        <th>description</th>-->
+<!--        <th>type</th>-->
+<!--        <th>duration</th>-->
+<!--        <th>seriesCount</th>-->
+<!--        <th>releaseYear</th>-->
+<!--        <th>image</th>-->
+<!--        <th>genres</th>-->
+<!--        <th>comments</th>-->
+
+<!--        <th>Action</th>-->
+<!--    </tr>-->
+<!--    </thead>-->
+<!--    <tbody>-->
+<!--        <tr th:each="entity : ${list}">-->
+<!--                                    <td th:text=${entity.name}></td>-->
+<!--                                            <td th:text=${entity.description}></td>-->
+<!--                                            <td th:text=${entity.type}></td>-->
+<!--                                            <td th:text=${entity.duration}></td>-->
+<!--                                            <td th:text=${entity.seriesCount}></td>-->
+<!--                                            <td th:text=${entity.releaseYear}></td>-->
+<!--                                            <td th:text=${entity.image}></td>-->
+<!--                                            <td>-->
+<!--                    <ul>-->
+<!--                        <li th:each="genres_item : ${entity.genres}" th:text="${genres_item}"></li>-->
+<!--                    </ul>-->
+<!--                </td>-->
+<!--                                            <td>-->
+<!--                    <ul>-->
+<!--                        <li th:each="comments_item : ${entity.comments}" th:text="${comments_item}"></li>-->
+<!--                    </ul>-->
+<!--                </td>-->
+<!--                -->
+<!--        <td>-->
+<!--            <a th:href="@{/item/{id}(id=${entity.id})}">See detail</a>-->
+<!--            <a th:href="@{/item/edit/{id}(id=${entity.id})}">Edit</a>-->
+<!--            <form th:if="${entity.id!=null}" method="get"-->
+<!--                  th:action="'/item/'-->
+<!--                  +${entity.id}+'/delete'">-->
+<!--                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">-->
+<!--            </form>-->
+<!--        </td>-->
+<!--    </tr>-->
+<!--    </tbody>-->
+<!--</table>-->
+<!--</body>-->
+<!--</html>-->

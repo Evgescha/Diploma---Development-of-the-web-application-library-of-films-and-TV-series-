@@ -3,6 +3,7 @@ package com.hescha.cinemalibrary.service;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.ItemType;
 import com.hescha.cinemalibrary.repository.*;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -96,7 +97,16 @@ public class ItemService extends CrudService<Item> {
         return repository.findTop3ItemsWithMostComments(topThree);
     }
 
+    public Page<Item> readPage(int pageNumber) {
+        Pageable page = PageRequest.of(pageNumber-1, 4);
+        return repository.findAll(page);
+    }
+
     public List<Item> findTwoRandomItems(){
         return repository.findTwoRandomItems();
+    }
+
+    public List<Item> findByNameContainsOrDescriptionContains(String searchPhrase) {
+        return repository.findAllByNameOrDescriptionIgnoreCase(searchPhrase);
     }
 }
