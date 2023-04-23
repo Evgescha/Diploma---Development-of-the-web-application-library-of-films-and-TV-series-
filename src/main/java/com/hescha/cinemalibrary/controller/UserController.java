@@ -1,5 +1,6 @@
 package com.hescha.cinemalibrary.controller;
 
+import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.service.ItemService;
@@ -107,4 +108,49 @@ public class UserController {
         }
         return REDIRECT_TO_ALL_ITEMS;
     }
+    @GetMapping("/list/{itemId}/{action}/{listType}")
+    public String manageUserList(@PathVariable("itemId") Long itemId,
+                                 @PathVariable("action") String action,
+                                 @PathVariable("listType") String listType) {
+        // Получение текущего пользователя
+        User currentUser = securityService.getLoggedIn();
+        // Получение элемента по itemId
+        Item item = itemService.read(itemId);
+        // Обработка действий add или remove
+        if ("add".equalsIgnoreCase(action)) {
+            // Удаление элемента из всех списков
+            currentUser.getFavouritesItems().remove(item);
+            currentUser.getFeatureItems().remove(item);
+            currentUser.getInprogresItems().remove(item);
+            currentUser.getWatchedItems().remove(item);
+
+            // Добавление элемента в выбранный список
+            if ("favourites".equalsIgnoreCase(listType)) {
+                currentUser.getFavouritesItems().add(item);
+            } else if ("feature".equalsIgnoreCase(listType)) {
+                currentUser.getFeatureItems().add(item);
+            } else if ("inprogres".equalsIgnoreCase(listType)) {
+                currentUser.getInprogresItems().add(item);
+            } else if ("watched".equalsIgnoreCase(listType)) {
+                currentUser.getWatchedItems().add(item);
+            }
+        } else if ("remove".equalsIgnoreCase(action)) {
+            if ("favourites".equalsIgnoreCase(listType)) {
+                currentUser.getFavouritesItems().remove(item);
+            } else if ("feature".equalsIgnoreCase(listType)) {
+                currentUser.getFeatureItems().remove(item);
+            } else if ("inprogres".equalsIgnoreCase(listType)) {
+                currentUser.getInprogresItems().remove(item);
+            } else if ("watched".equalsIgnoreCase(listType)) {
+                currentUser.getWatchedItems().remove(item);
+            }
+        }
+
+        // Сохранение обновленного пользователя
+        service.update(currentUser);
+
+        // Возвращение пользователя на страницу элемента
+        return "redirect:/item/" + itemId;
+    }
+
 }

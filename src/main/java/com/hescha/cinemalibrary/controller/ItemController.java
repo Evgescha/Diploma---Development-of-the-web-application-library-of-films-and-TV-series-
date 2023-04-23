@@ -7,6 +7,7 @@ import com.hescha.cinemalibrary.model.ItemType;
 import com.hescha.cinemalibrary.service.CommentService;
 import com.hescha.cinemalibrary.service.GenreService;
 import com.hescha.cinemalibrary.service.ItemService;
+import com.hescha.cinemalibrary.service.SecurityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,7 @@ public class ItemController {
 
     private final GenreService genreService;
     private final CommentService commentService;
+    private final SecurityService securityService;
 
     @GetMapping
     public String readAll(@RequestParam(name = "page", defaultValue = "1", required = false) Integer page, Model model) {
@@ -61,6 +63,7 @@ public class ItemController {
 
     @GetMapping("/{id}")
     public String read(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("user", securityService.getLoggedIn());
         model.addAttribute("entity", service.read(id));
         model.addAttribute("randomList", service.findTwoRandomItems());
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;

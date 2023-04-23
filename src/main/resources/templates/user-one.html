@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <title>User Profile</title>
     <div th:replace="~{/commons/head :: head}"></div>
+    <style>
+        .card-text {
+            width: 40%;
+        }
+    </style>
 </head>
 <body>
 <div th:replace="~{/commons/header :: header}"></div>
@@ -32,31 +37,35 @@
                                 <p class="card-text">Name: <span th:text="${entity.firstname + ' ' + entity.lastname}">First Last</span></p>
                                 <p class="card-text">Email: <span th:text="${entity.email}">example@example.com</span></p>
 
-                                <div class="card-text">
-                                    <h6>Favourites Items:</h6>
-                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.favouritesItems})}"></div>
-                                </div>
-
-                                <div class="card-text">
-                                    <h6>Feature Items:</h6>
-                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.featureItems})}"></div>
-                                </div>
-
-                                <div class="card-text">
-                                    <h6>In Progress Items:</h6>
-                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.inprogresItems})}"></div>
-                                </div>
-
-                                <div class="card-text">
-                                    <h6>Watched Items:</h6>
-                                    <div th:replace="~{/commons/card :: itemCard(randomList=${entity.watchedItems})}"></div>
-                                </div>
-
                                 <a th:href="'/user/edit/'+${entity.id}" class="filter__btn">Edit Profile</a>
                             </div>
                         </div>
                     </div>
+
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" style="color: white">
+            <h2>Favourites Items:</h2>
+            <div class="card-text d-flex">
+                <div th:replace="~{/commons/card :: itemCard(randomList=${entity.favouritesItems})}"></div>
+            </div>
+
+            <h2>Feature Items:</h2>
+            <div class="card-text d-flex">
+                <div th:replace="~{/commons/card :: itemCard(randomList=${entity.featureItems})}"></div>
+            </div>
+
+            <h2>In Progress Items:</h2>
+            <div class="card-text d-flex">
+                <div th:replace="~{/commons/card :: itemCard(randomList=${entity.inprogresItems})}"></div>
+            </div>
+
+            <h2>Watched Items:</h2>
+            <div class="card-text d-flex">
+                <div th:replace="~{/commons/card :: itemCard(randomList=${entity.watchedItems})}"></div>
             </div>
         </div>
     </div>

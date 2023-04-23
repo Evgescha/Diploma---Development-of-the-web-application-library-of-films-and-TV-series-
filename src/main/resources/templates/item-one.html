@@ -33,8 +33,47 @@
                             <div class="card__cover">
                                 <img th:src="${entity.image}" src="/img/covers/cover.jpg" alt="">
                             </div>
+                            <div class="manageList">
+                                <div class="filter__item">
+                                    <span class="filter__item-label">List:</span>
+
+                                    <div class="filter__item-btn dropdown-toggle" role="navigation" id="filter-list" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        <input type="button" value="Select action">
+                                        <span></span>
+                                    </div>
+
+                                    <ul class="filter__item-menu dropdown-menu scrollbar-dropdown" aria-labelledby="filter-list" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 48px, 0px);" x-placement="bottom-start">
+                                        <li data-v="add/favourites" th:unless="${#lists.contains(user.favouritesItems, entity)}">Add to favourites</li>
+                                        <li data-v="remove/favourites" th:if="${#lists.contains(user.favouritesItems, entity)}">Remove from favourites</li>
+                                        <li data-v="add/feature" th:unless="${#lists.contains(user.featureItems, entity)}">Add to feature</li>
+                                        <li data-v="remove/feature" th:if="${#lists.contains(user.featureItems, entity)}">Remove from feature</li>
+                                        <li data-v="add/inprogres" th:unless="${#lists.contains(user.inprogresItems, entity)}">Add to in progress</li>
+                                        <li data-v="remove/inprogres" th:if="${#lists.contains(user.inprogresItems, entity)}">Remove from in progress</li>
+                                        <li data-v="add/watched" th:unless="${#lists.contains(user.watchedItems, entity)}">Add to watched</li>
+                                        <li data-v="remove/watched" th:if="${#lists.contains(user.watchedItems, entity)}">Remove from watched</li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
                         </div>
                         <!-- end card cover -->
+                        <script th:inline="javascript">
+                            document.addEventListener('DOMContentLoaded', function() {
+                                const listMenuItems = document.querySelectorAll('.filter__item-menu li');
+                                listMenuItems.forEach(function(item) {
+                                    item.addEventListener('click', function() {
+                                        const action = this.getAttribute('data-v');
+                                        if (action) {
+                                            const itemId = /*[[${entity.id}]]*/;
+                                            const url = "/user/list/" + itemId + "/" + action;
+                                            window.location.href = url;
+                                        }
+                                    });
+                                });
+                            });
+                        </script>
+
 
                         <!-- card content -->
                         <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-9">
