@@ -12,33 +12,43 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
+					<h3 th:if="${success != null}" th:text="${success}" class="text-center"></h3>
+
+					<h3 th:if="${#request.getParameter('error') != null and #request.getParameter('error') == 'true'}" class="text-center"></h3>
 					<div class="sign__content">
 						<!-- registration form -->
-						<form action="#" class="sign__form">
+						<form action="/registration" class="sign__form" method="post">
 							<a href="index" class="sign__logo">
 								<img src="/img/logo.svg" alt="">
 							</a>
 
 							<div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Name">
+								<input type="text" class="sign__input" placeholder="Firstname" name="firstname" required>
 							</div>
 
 							<div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Email">
+								<input type="text" class="sign__input" placeholder="Lastname" name="lastname" required>
 							</div>
 
 							<div class="sign__group">
-								<input type="password" class="sign__input" placeholder="Password">
+								<input type="text" class="sign__input" placeholder="Email" name="email" required>
 							</div>
 
-							<div class="sign__group sign__group--checkbox">
-								<input id="remember" name="remember" type="checkbox" checked="checked">
-								<label for="remember">I agree to the <a href="#">Privacy Policy</a></label>
+							<div class="sign__group">
+								<input type="text" class="sign__input" placeholder="Username" name="username">
+							</div>
+
+							<div class="sign__group">
+								<input type="password" class="sign__input" placeholder="Password" name="password" required>
+							</div>
+
+							<div class="sign__group">
+								<input type="text" class="sign__input" placeholder="Image path" name="image">
 							</div>
 							
-							<button class="sign__btn" type="button">Sign up</button>
+							<button class="sign__btn" type="submit">Sign up</button>
 
-							<span class="sign__text">Already have an account? <a href="signin">Sign in!</a></span>
+							<span class="sign__text">Already have an account? <a href="/login">Sign in!</a></span>
 						</form>
 						<!-- registration form -->
 					</div>

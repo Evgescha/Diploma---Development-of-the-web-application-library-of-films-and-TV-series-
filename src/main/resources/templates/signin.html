@@ -2,51 +2,48 @@
 <html lang="en">
 
 <head>
-	<title>Signin</title>
-	<div th:replace="~{/commons/head :: head}"></div>
+    <title>Signin</title>
+    <div th:replace="~{/commons/head :: head}"></div>
 
 </head>
 <body class="body">
 
-	<div class="sign section--bg" data-bg="/img/section/section.jpg">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div class="sign__content">
-						<!-- authorization form -->
-						<form action="#" class="sign__form">
-							<a href="index" class="sign__logo">
-								<img src="/img/logo.svg" alt="">
-							</a>
+<div class="sign section--bg" data-bg="/img/section/section.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h3 th:if="${success != null}" th:text="${success}" class="text-center"></h3>
 
-							<div class="sign__group">
-								<input type="text" class="sign__input" placeholder="Email">
-							</div>
+                <h3 th:if="${#request.getParameter('error') != null and #request.getParameter('error') == 'true'}" class="text-center"></h3>
 
-							<div class="sign__group">
-								<input type="password" class="sign__input" placeholder="Password">
-							</div>
+                <div class="sign__content">
+                    <!-- authorization form -->
+                    <form action="/login" class="sign__form" method="post">
+                        <a href="index" class="sign__logo">
+                            <img src="/img/logo.svg" alt="">
+                        </a>
 
-							<div class="sign__group sign__group--checkbox">
-								<input id="remember" name="remember" type="checkbox" checked="checked">
-								<label for="remember">Remember Me</label>
-							</div>
-							
-							<button class="sign__btn" type="button">Sign in</button>
+                        <div class="sign__group">
+                            <input type="text" class="sign__input" placeholder="username" name="username">
+                        </div>
 
-							<span class="sign__text">Don't have an account? <a href="signup">Sign up!</a></span>
+                        <div class="sign__group">
+                            <input type="password" class="sign__input" placeholder="Password" name="password">
+                        </div>
 
-							<span class="sign__text"><a href="#">Forgot password?</a></span>
-						</form>
-						<!-- end authorization form -->
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                        <button class="sign__btn" type="submit">Sign in</button>
+
+                        <span class="sign__text">Don't have an account? <a href="/registration">Sign up!</a></span>
+                    </form>
+                    <!-- end authorization form -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-	<div th:replace="~{/commons/footer :: footer}"></div>
+<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
 
 </html>

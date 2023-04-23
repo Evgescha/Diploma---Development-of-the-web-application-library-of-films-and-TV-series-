@@ -23,13 +23,13 @@ public class LoginAndRegistrationController {
         return "signup";
     }
 
-    @PostMapping("/register")
+    @PostMapping("/registration")
     public String registrationPost(User user, Model model) {
         boolean success = userService.registerNew(user);
         String response = success
                 ? "Success"
                 : "Registration failed. Try again later";
         model.addAttribute("success", response);
-        return "login";
+        return "signin";
     }
 }

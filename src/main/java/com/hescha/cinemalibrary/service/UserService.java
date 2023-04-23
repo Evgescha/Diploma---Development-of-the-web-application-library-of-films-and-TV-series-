@@ -76,14 +76,6 @@ public class UserService extends CrudService<User>
         return repository.findByImageContains(image);
     }
 
-    public List<User> findByAddress(String address) {
-        return repository.findByAddress(address);
-    }
-
-    public List<User> findByAddressContains(String address) {
-        return repository.findByAddressContains(address);
-    }
-
     public Set<User> findByFavouritesItemsContains(com.hescha.cinemalibrary.model.Item favouritesItems) {
         return repository.findByFavouritesItemsContains(favouritesItems);
     }
@@ -122,7 +114,6 @@ public class UserService extends CrudService<User>
         read.setLastname(entity.getLastname());
         read.setEmail(entity.getEmail());
         read.setImage(entity.getImage());
-        read.setAddress(entity.getAddress());
         read.setFavouritesItems(entity.getFavouritesItems());
         read.setFeatureItems(entity.getFeatureItems());
         read.setInprogresItems(entity.getInprogresItems());

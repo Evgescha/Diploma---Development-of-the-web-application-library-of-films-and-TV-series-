@@ -33,10 +33,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findByImageContains(String image);
 
-    List<User> findByAddress(String address);
-
-    List<User> findByAddressContains(String address);
-
     Set<User> findByFavouritesItemsContains(com.hescha.cinemalibrary.model.Item favouritesItems);
 
     Set<User> findByFeatureItemsContains(com.hescha.cinemalibrary.model.Item featureItems);
