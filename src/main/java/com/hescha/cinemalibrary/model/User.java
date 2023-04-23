@@ -19,7 +19,7 @@ public class User extends AbstractEntity {
     private String firstname;
     private String lastname;
     private String email;
-    private String image;
+    private String image = "/img/user.png";
     private String address;
     @ManyToMany
     private Set<Item> favouritesItems = new HashSet();

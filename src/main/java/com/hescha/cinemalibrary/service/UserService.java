@@ -2,21 +2,30 @@ package com.hescha.cinemalibrary.service;
 
 import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.repository.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Set;
 
 @Service
-public class UserService extends CrudService<User> implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserService extends CrudService<User>
+        implements org.springframework.security.core.userdetails.UserDetailsService {
 
     private final UserRepository repository;
+    private final RoleService roleService;
 
-    public UserService(UserRepository repository) {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository repository,
+                       RoleService roleService) {
         super(repository);
         this.repository = repository;
+        this.roleService = roleService;
     }
 
     public User findByUsername(String username) {
@@ -119,6 +128,21 @@ public class UserService extends CrudService<User> implements org.springframewor
         read.setInprogresItems(entity.getInprogresItems());
         read.setWatchedItems(entity.getWatchedItems());
         read.setRoles(entity.getRoles());
+    }
+
+    public boolean registerNew(User entity) {
+        entity.getRoles().add(roleService.read(1));
+        if (repository.findByUsername(entity.getUsername()) != null) {
+            return false;
+        }
+        entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+        try {
+            create(entity);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
 

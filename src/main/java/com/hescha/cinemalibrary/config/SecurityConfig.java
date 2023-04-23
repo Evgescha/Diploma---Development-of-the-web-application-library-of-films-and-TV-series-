@@ -19,10 +19,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
-        auth.inMemoryAuthentication()
-                .withUser("user")
-                .password("{noop}user") // {noop} указывает, что пароль не будет кодироваться
-                .roles("USER");
     }
 
     @Override
@@ -31,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/h2", "/h2/**", "/css/*", "/js/*", "/img/*", "/project",
+                .antMatchers("/", "/h2", "/h2/**",
+                        "/css/**", "/js/**", "/img/**", "/lib/**", "/icon/**", "/fonts/**",
                         "/registration", "/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/registration", "/login").permitAll()
                 .anyRequest().authenticated()
