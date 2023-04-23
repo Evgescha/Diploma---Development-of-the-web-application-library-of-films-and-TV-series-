@@ -35,6 +35,9 @@
               <li class="header__nav-item">
                 <a href="/about" class="header__nav-link">About</a>
               </li>
+              <li class="header__nav-item" th:if="${#request.userPrincipal != null}">
+                <a href="/logout" class="header__nav-link">Logout</a>
+              </li>
             </ul>
 
             <!-- header auth -->
@@ -43,7 +46,7 @@
                 <i class="icon ion-ios-search"></i>
               </button>
 
-              <a href="signin" class="header__sign-in">
+              <a href="signin" class="header__sign-in"  th:if="${#request.userPrincipal == null}">
                 <i class="icon ion-ios-log-in"></i>
                 <span>sign in</span>
               </a>
