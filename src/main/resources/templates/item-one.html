@@ -57,6 +57,15 @@
                     </div>
                 </div>
             </div>
+
+            <div>
+                <a th:href="@{/item/edit/{id}(id=${entity.id})}" class="form__btn">Edit</a>
+                <form th:if="${entity.id!=null}" method="get"
+                      th:action="'/item/'
+                  +${entity.id}+'/delete'">
+                    <input class="form__btn" type="submit" value="Delete" onclick="return confirm('Are you sure?')">
+                </form>
+            </div>
             <!-- end content -->
             <div th:replace="~{/commons/social :: social}"></div>
         </div>
