@@ -1,5 +1,6 @@
 package com.hescha.cinemalibrary.controller;
 
+import com.hescha.cinemalibrary.model.Genre;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.ItemType;
@@ -7,10 +8,13 @@ import com.hescha.cinemalibrary.service.CommentService;
 import com.hescha.cinemalibrary.service.GenreService;
 import com.hescha.cinemalibrary.service.ItemService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.stereotype.Controller;
+
+import java.util.List;
 
 
 @Controller
@@ -34,6 +38,24 @@ public class ItemController {
     public String readAll(@RequestParam(name = "page", defaultValue = "1", required = false) Integer page, Model model) {
         model.addAttribute("list", service.readPage(page));
         model.addAttribute("paged", "true");
+        model.addAttribute("genres", genreService.readAll());
+        return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
+    }
+
+    @GetMapping("/filter")
+    public String filter(@RequestParam("searchPhrase") String searchPhrase,
+                         @RequestParam(value = "genreId") Integer genreId,
+                         Model model) {
+        List<Item> filteredItems;
+
+        if (genreId != null) {
+            filteredItems = service.findItemsBySearchPhraseAndGenreId(searchPhrase, genreId);
+        } else {
+            filteredItems = service.findItemsBySearchPhrase(searchPhrase);
+        }
+
+        model.addAttribute("list", filteredItems);
+        model.addAttribute("genres", genreService.readAll());
         return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
     }
 
@@ -47,6 +69,7 @@ public class ItemController {
     @GetMapping("/search")
     public String search(@RequestParam("searchPhrase") String searchPhrase, Model model) {
         model.addAttribute("list", service.findByNameContainsOrDescriptionContains(searchPhrase));
+        model.addAttribute("genres", genreService.readAll());
         return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
     }
 

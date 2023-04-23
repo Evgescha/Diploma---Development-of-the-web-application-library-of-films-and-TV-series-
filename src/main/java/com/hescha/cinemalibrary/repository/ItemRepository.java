@@ -1,7 +1,9 @@
 package com.hescha.cinemalibrary.repository;
 
+import com.hescha.cinemalibrary.model.Genre;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.ItemType;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -44,4 +46,11 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("SELECT i FROM Item i WHERE lower(i.name) LIKE lower(concat('%', :searchPhrase, '%')) OR lower(i.description) LIKE lower(concat('%', :searchPhrase, '%'))")
     List<Item> findAllByNameOrDescriptionIgnoreCase(@Param("searchPhrase") String searchPhrase);
+    @Query("SELECT i FROM Item i JOIN i.genres g WHERE (LOWER(i.name) LIKE LOWER(CONCAT('%', :searchPhrase, '%')) OR LOWER(i.description) LIKE LOWER(CONCAT('%', :searchPhrase, '%'))) AND g.id = :genreId")
+    List<Item> findItemsBySearchPhraseAndGenreId(@Param("searchPhrase") String searchPhrase, @Param("genreId") Long genreId);
+
+
+    @Query("SELECT i FROM Item i WHERE LOWER(i.name) LIKE LOWER(CONCAT('%', :searchPhrase, '%')) OR LOWER(i.description) LIKE LOWER(CONCAT('%', :searchPhrase, '%'))")
+    List<Item> findItemsBySearchPhrase(@Param("searchPhrase") String searchPhrase);
+
 }
