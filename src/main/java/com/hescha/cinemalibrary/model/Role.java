@@ -11,9 +11,6 @@ import java.util.List;
 @Data
 public class Role extends AbstractEntity{
     private String role;
-    @ManyToMany
-    private List<User> users = new ArrayList<>();
-
     @Override
     public String toString() {
         return role;

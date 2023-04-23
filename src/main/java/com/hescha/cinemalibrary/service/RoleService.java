@@ -25,11 +25,6 @@ public class RoleService extends CrudService<Role> {
         return repository.findByRoleContains(role);
     }
 
-    public List<Role> findByUsersContains(com.hescha.cinemalibrary.model.User users) {
-        return repository.findByUsersContains(users);
-    }
-
-
     public Role update(Long id, Role entity) {
         Role read = read(id);
         if (read == null) {

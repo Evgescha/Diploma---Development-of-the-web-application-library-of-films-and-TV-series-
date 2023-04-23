@@ -10,6 +10,7 @@ import java.util.List;
 @Entity
 public class Item extends AbstractEntity{
     private String name;
+    @Column(length = 4096)
     private String description;
     private ItemType type;
     private Integer duration;

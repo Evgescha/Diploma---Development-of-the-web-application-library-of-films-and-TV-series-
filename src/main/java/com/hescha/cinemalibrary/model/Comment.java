@@ -2,6 +2,7 @@ package com.hescha.cinemalibrary.model;
 
 import lombok.Data;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
@@ -19,6 +20,7 @@ public class Comment extends AbstractEntity{
 
     private LocalDateTime created = LocalDateTime.now();
 
+    @Column(length = 4096)
     private String message;
 
     @Transient

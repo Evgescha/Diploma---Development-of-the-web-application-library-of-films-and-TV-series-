@@ -91,7 +91,7 @@
                                 <ul class="reviews__list">
                                     <li class="reviews__item" th:each="comment : ${entity.comments}">
                                         <div class="reviews__autor">
-                                            <img class="reviews__avatar" src="/img/user.png" alt="">
+                                            <img class="reviews__avatar" th:src="${comment.owner.image}" alt="">
                                             <span class="reviews__name"
                                                   th:text="${comment.owner!=null?comment.owner.username:''}">Best Marvel movie in my opinion</span>
                                             <span class="reviews__time"

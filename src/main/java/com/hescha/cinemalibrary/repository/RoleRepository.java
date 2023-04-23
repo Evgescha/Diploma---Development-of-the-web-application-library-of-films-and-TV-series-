@@ -12,6 +12,4 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
     List<Role> findByRole(String role);
 
     List<Role> findByRoleContains(String role);
-
-    List<Role> findByUsersContains(com.hescha.cinemalibrary.model.User users);
 }
