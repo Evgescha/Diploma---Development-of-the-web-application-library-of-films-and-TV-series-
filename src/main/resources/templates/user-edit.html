@@ -2,78 +2,70 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit User</title>
+    <title>Edit User Profile</title>
+    <div th:replace="~{/commons/head :: head}"></div>
 </head>
 <body>
-<h1>Edit User</h1>
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/user}" th:object="${entity}" method="post">
+<div th:replace="~{/commons/header :: header}"></div>
 
-    <p>
-        <label for="username">username:</label>
-            <input type="text" th:field="*{username}" id="username" required>
-        </p>
-    <p>
-        <label for="password">password:</label>
-            <input type="text" th:field="*{password}" id="password" required>
-        </p>
-    <p>
-        <label for="firstname">firstname:</label>
-            <input type="text" th:field="*{firstname}" id="firstname" required>
-        </p>
-    <p>
-        <label for="lastname">lastname:</label>
-            <input type="text" th:field="*{lastname}" id="lastname" required>
-        </p>
-    <p>
-        <label for="email">email:</label>
-            <input type="text" th:field="*{email}" id="email" required>
-        </p>
-    <p>
-        <label for="image">image:</label>
-            <input type="text" th:field="*{image}" id="image" required>
-        </p>
-    <p>
-        <label for="address">address:</label>
-            <input type="text" th:field="*{address}" id="address" required>
-        </p>
-    <p>
-        <label for="favouritesItems">favouritesItems:</label>
-            <select multiple="multiple" th:field="*{favouritesItems}" id="favouritesItems">
-            <option th:each="favouritesItems_item : ${favouritesItems_list}" th:value="${favouritesItems_item}" th:text="${favouritesItems_item}"></option>
-        </select>
-        </p>
-    <p>
-        <label for="featureItems">featureItems:</label>
-            <select multiple="multiple" th:field="*{featureItems}" id="featureItems">
-            <option th:each="featureItems_item : ${featureItems_list}" th:value="${featureItems_item}" th:text="${featureItems_item}"></option>
-        </select>
-        </p>
-    <p>
-        <label for="inprogresItems">inprogresItems:</label>
-            <select multiple="multiple" th:field="*{inprogresItems}" id="inprogresItems">
-            <option th:each="inprogresItems_item : ${inprogresItems_list}" th:value="${inprogresItems_item}" th:text="${inprogresItems_item}"></option>
-        </select>
-        </p>
-    <p>
-        <label for="watchedItems">watchedItems:</label>
-            <select multiple="multiple" th:field="*{watchedItems}" id="watchedItems">
-            <option th:each="watchedItems_item : ${watchedItems_list}" th:value="${watchedItems_item}" th:text="${watchedItems_item}"></option>
-        </select>
-        </p>
-    <p>
-        <label for="roles">roles:</label>
-            <select multiple="multiple" th:field="*{roles}" id="roles">
-            <option th:each="roles_item : ${roles_list}" th:value="${roles_item}" th:text="${roles_item}"></option>
-        </select>
-        </p>
+<div class="container pt-5 mt-5 section">
+    <div class="col-12 content__head">
+        <h2 class="content__title d-flex justify-content-center mt-5">Edit User Profile</h2>
+    </div>
+    <div class="row justify-content-center" style="color: white">
+        <div class="col-12 col-lg-8 col-xl-8">
+            <div class="tab-content">
+                <div class="tab-pane fade show active">
+                    <form th:action="@{/user}" th:object="${entity}" method="post" class="form">
+                        <input type="text" th:field="*{id}" id="id" hidden>
 
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/user}">Cancel</a>
-    </p>
-</form>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" th:field="*{username}" id="username" class="form__input" placeholder="Username"
+                                   required>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="firstname">First Name:</label>
+                            <input type="text" th:field="*{firstname}" id="firstname" class="form__input" placeholder="First Name"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastname">Last Name:</label>
+                            <input type="text" th:field="*{lastname}" id="lastname" class="form__input" placeholder="Last Name"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="email" th:field="*{email}" id="email" class="form__input" placeholder="Email"
+                                   required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Profile Image URL:</label>
+                            <input type="text" th:field="*{image}" id="image" class="form__input" placeholder="Profile Image URL"
+                                   required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="image">Profile Image URL:</label>
+                            <input type="password" id="image" class="form__input" placeholder="Your password" name="password" required>
+                        </div>
+
+                        <div class="form-group d-flex justify-content-around">
+                            <button type="submit" class="form__btn">Save</button>
+                            <a href="/user" class="form__btn">Cancel</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
 </html>

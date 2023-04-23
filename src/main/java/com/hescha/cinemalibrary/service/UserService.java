@@ -114,11 +114,6 @@ public class UserService extends CrudService<User>
         read.setLastname(entity.getLastname());
         read.setEmail(entity.getEmail());
         read.setImage(entity.getImage());
-        read.setFavouritesItems(entity.getFavouritesItems());
-        read.setFeatureItems(entity.getFeatureItems());
-        read.setInprogresItems(entity.getInprogresItems());
-        read.setWatchedItems(entity.getWatchedItems());
-        read.setRoles(entity.getRoles());
     }
 
     public boolean registerNew(User entity) {

@@ -17,7 +17,6 @@
         <th>lastname</th>
         <th>email</th>
         <th>image</th>
-        <th>address</th>
         <th>favouritesItems</th>
         <th>featureItems</th>
         <th>inprogresItems</th>
@@ -28,40 +27,39 @@
     </tr>
     </thead>
     <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.username}></td>
-                                            <td th:text=${entity.password}></td>
-                                            <td th:text=${entity.firstname}></td>
-                                            <td th:text=${entity.lastname}></td>
-                                            <td th:text=${entity.email}></td>
-                                            <td th:text=${entity.image}></td>
-                                            <td th:text=${entity.address}></td>
-                                            <td>
-                    <ul>
-                        <li th:each="favouritesItems_item : ${entity.favouritesItems}" th:text="${favouritesItems_item}"></li>
-                    </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="featureItems_item : ${entity.featureItems}" th:text="${featureItems_item}"></li>
-                    </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="inprogresItems_item : ${entity.inprogresItems}" th:text="${inprogresItems_item}"></li>
-                    </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="watchedItems_item : ${entity.watchedItems}" th:text="${watchedItems_item}"></li>
-                    </ul>
-                </td>
-                                            <td>
-                    <ul>
-                        <li th:each="roles_item : ${entity.roles}" th:text="${roles_item}"></li>
-                    </ul>
-                </td>
-                
+    <tr th:each="entity : ${list}">
+        <td th:text=${entity.username}></td>
+        <td th:text=${entity.password}></td>
+        <td th:text=${entity.firstname}></td>
+        <td th:text=${entity.lastname}></td>
+        <td th:text=${entity.email}></td>
+        <td th:text=${entity.image}></td>
+        <td>
+            <ul>
+                <li th:each="favouritesItems_item : ${entity.favouritesItems}" th:text="${favouritesItems_item}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="featureItems_item : ${entity.featureItems}" th:text="${featureItems_item}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="inprogresItems_item : ${entity.inprogresItems}" th:text="${inprogresItems_item}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="watchedItems_item : ${entity.watchedItems}" th:text="${watchedItems_item}"></li>
+            </ul>
+        </td>
+        <td>
+            <ul>
+                <li th:each="roles_item : ${entity.roles}" th:text="${roles_item}"></li>
+            </ul>
+        </td>
+
         <td>
             <a th:href="@{/user/{id}(id=${entity.id})}">See detail</a>
             <a th:href="@{/user/edit/{id}(id=${entity.id})}">Edit</a>

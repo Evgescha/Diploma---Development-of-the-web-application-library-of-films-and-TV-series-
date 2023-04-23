@@ -92,7 +92,6 @@ public class ItemService extends CrudService<Item> {
         read.setReleaseYear(entity.getReleaseYear());
         read.setImage(entity.getImage());
         read.setGenres(entity.getGenres());
-        read.setComments(entity.getComments());
     }
 
     public List<Item> readTop3Commented() {

@@ -6,6 +6,8 @@ import com.hescha.cinemalibrary.service.ItemService;
 import com.hescha.cinemalibrary.service.RoleService;
 import com.hescha.cinemalibrary.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,6 +35,8 @@ public class UserController {
 
     private final ItemService itemService;
     private final RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public String readAll(Model model) {
@@ -64,9 +68,9 @@ public class UserController {
     public String save(@ModelAttribute User entity, RedirectAttributes ra) {
         if (entity.getId() == null) {
             try {
-                User createdEntity = service.create(entity);
+                service.registerNew(entity);
                 ra.addFlashAttribute(MESSAGE, "Creating is successful");
-                return REDIRECT_TO_ALL_ITEMS + "/" + createdEntity.getId();
+                return REDIRECT_TO_ALL_ITEMS;
             } catch (Exception e) {
                 ra.addFlashAttribute(MESSAGE, "Creating failed");
                 e.printStackTrace();
@@ -74,6 +78,7 @@ public class UserController {
             return REDIRECT_TO_ALL_ITEMS;
         } else {
             try {
+                entity.setPassword(passwordEncoder.encode(entity.getPassword()));
                 service.update(entity.getId(), entity);
                 ra.addFlashAttribute(MESSAGE, "Editing is successful");
             } catch (Exception e) {
