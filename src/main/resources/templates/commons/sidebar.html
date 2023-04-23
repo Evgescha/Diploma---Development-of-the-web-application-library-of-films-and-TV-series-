@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- sidebar -->
+<div class="col-12 col-lg-4 col-xl-4" th:fragment="sidebar">
+    <div class="row">
+        <!-- section title -->
+        <div class="col-12">
+            <h2 class="section__title section__title--sidebar">You may also like...</h2>
+        </div>
+        <!-- end section title -->
+
+        <!-- card -->
+        <div class="col-6 col-sm-4 col-lg-6" th:each="entity:${randomList}">
+            <div class="card">
+                <div class="card__cover">
+                    <img th:src="${entity.image}" alt="Item image">
+                    <a th:href="'/item/'+${entity.id}" class="card__play">
+                        <i class="icon ion-ios-play"></i>
+                    </a>
+                </div>
+                <div class="card__content">
+                    <h3 class="card__title"><a th:href="'/item/'+${entity.id}" th:text="${entity.name}">I Dream in Another Language</a></h3>
+                    <span class="card__category">
+                        <a href="#" th:each="genre:${entity.genres}" th:text="${genre.name}">Action</a>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- end card -->
+
+    </div>
+</div>
+<!-- end sidebar -->
+</body>
+</html>

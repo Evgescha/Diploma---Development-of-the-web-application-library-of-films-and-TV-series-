@@ -44,6 +44,7 @@ public class ItemController {
     @GetMapping("/{id}")
     public String read(@PathVariable("id") Long id, Model model) {
         model.addAttribute("entity", service.read(id));
+        model.addAttribute("randomList", service.findTwoRandomItems());
         return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
     }
 

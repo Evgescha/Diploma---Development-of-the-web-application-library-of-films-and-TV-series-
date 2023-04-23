@@ -1,67 +1,127 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>View Item</title>
-    <meta charset="UTF-8">
-</head>
-<body>
-<h1>Item Details</h1>
-<h3 th:if="${message!=null}" th:text="${message}">Message</h3>
-<table>
-        <tr>
-        <th>name:</th>
-                <td th:text="${entity.name}"></td>
-            </tr>
-        <tr>
-        <th>description:</th>
-                <td th:text="${entity.description}"></td>
-            </tr>
-        <tr>
-        <th>type:</th>
-                <td th:text="${entity.type}"></td>
-            </tr>
-        <tr>
-        <th>duration:</th>
-                <td th:text="${entity.duration}"></td>
-            </tr>
-        <tr>
-        <th>seriesCount:</th>
-                <td th:text="${entity.seriesCount}"></td>
-            </tr>
-        <tr>
-        <th>releaseYear:</th>
-                <td th:text="${entity.releaseYear}"></td>
-            </tr>
-        <tr>
-        <th>image:</th>
-                <td th:text="${entity.image}"></td>
-            </tr>
-        <tr>
-        <th>genres:</th>
-                <td>
-            <ul>
-                <li th:each="genres_item : ${entity.genres}" th:text="${genres_item}"></li>
-            </ul>
-        </td>
-            </tr>
-        <tr>
-        <th>comments:</th>
-                <td>
-            <ul>
-                <li th:each="comments_item : ${entity.comments}" th:text="${comments_item}"></li>
-            </ul>
-        </td>
-            </tr>
-    
+<html lang="en">
 
-</table>
-<br>
-<a th:href="@{/item}">Back to the List</a>
-<a th:href="@{/item/edit/{id}(id=${entity.id})}">Edit</a>
-<form th:if="${entity.id!=null}" method="get"
-         th:action="'/item/'
-               + ${entity.id} + '/delete'">
-    <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-</form>
+<head>
+    <title>Details</title>
+    <div th:replace="~{/commons/head :: head}"></div>
+</head>
+<body class="body">
+
+
+<div th:replace="~{/commons/header :: header}"></div>
+<!-- details -->
+<section class="section details">
+    <!-- details background -->
+    <div class="details__bg" data-bg="/img/home/home__bg.jpg"></div>
+    <!-- end details background -->
+
+    <!-- details content -->
+    <div class="container">
+        <div class="row">
+            <!-- title -->
+            <div class="col-12">
+                <h1 class="details__title" th:text="${entity.name}">I Dream in Another Language</h1>
+            </div>
+            <!-- end title -->
+
+            <!-- content -->
+            <div class="col-10">
+                <div class="card card--details card--series">
+                    <div class="row">
+                        <!-- card cover -->
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3">
+                            <div class="card__cover">
+                                <img th:src="${entity.image}" src="/img/covers/cover.jpg" alt="">
+                            </div>
+                        </div>
+                        <!-- end card cover -->
+
+                        <!-- card content -->
+                        <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-9">
+                            <div class="card__content">
+                                <ul class="card__meta">
+                                    <li><span>Genre:</span> <span th:each="genre, iterStat : ${entity.genres}" th:text="${genre.name + (iterStat.last ? '' : ', ')}">Action, Triler</span></li>
+                                    <li><span>Type:</span> <span th:text="${entity.type}">2017</span></li>
+                                    <li><span>Series:</span> <span th:text="${entity.seriesCount}">2017</span></li>
+                                    <li><span>Release year:</span> <span th:text="${entity.releaseYear}">2017</span></li>
+                                    <li><span>Running time:</span> <span th:text="${entity.duration} + ' min'">120 min</span></li>
+                                </ul>
+
+                                <div class="card__description card__description--details" th:text="${entity.description}">
+                                    It is a long established fact that a reader will be distracted by the readable
+                                    content of a page when looking at its layout. The point of using Lorem Ipsum is that
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end card content -->
+                    </div>
+                </div>
+            </div>
+            <!-- end content -->
+            <div th:replace="~{/commons/social :: social}"></div>
+        </div>
+    </div>
+    <!-- end details content -->
+</section>
+<!-- end details -->
+
+<div class="container">
+    <div class="col-12 content__head">
+        <!-- content title -->
+        <h2 class="content__title">Comments</h2>
+    </div>
+    <div class="row">
+        <div class="col-12 col-lg-8 col-xl-8">
+            <!-- content tabs -->
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade  show active" id="tab-2" role="tabpanel" aria-labelledby="2-tab">
+                    <div class="row">
+                        <!-- comments -->
+                        <div class="col-12">
+                            <div class="reviews">
+                                <ul class="reviews__list">
+                                    <li class="reviews__item" th:each="comment : ${entity.comments}">
+                                        <div class="reviews__autor">
+                                            <img class="reviews__avatar" src="/img/user.png" alt="">
+                                            <span class="reviews__name"
+                                                  th:text="${comment.owner!=null?comment.owner.username:''}">Best Marvel movie in my opinion</span>
+                                            <span class="reviews__time"
+                                                  th:text="${comment.getFormattedCreated()} + ' by ' + ${comment.owner!=null?comment.owner.username:''}">24.08.2018, 17:53 by John Doe</span>
+
+                                        </div>
+                                        <p class="reviews__text" th:text="${comment.message}">There are many variations of passages of Lorem
+                                            Ipsum available, but the majority have suffered alteration in some form,
+                                            by injected humour, or randomised words which don't look even slightly
+                                            believable. If you are going to use a passage of Lorem Ipsum, you need
+                                            to be sure there isn't anything embarrassing hidden in the middle of
+                                            text.</p>
+                                    </li>
+                                </ul>
+
+                                <form action="/comment" class="form" method="post">
+                                    <input type="text" class="form__input" placeholder="Title" hidden th:value="${entity.id}" name="itemId">
+                                    <textarea class="form__textarea" placeholder="Review" required name="message"></textarea>
+                                    <button type="submit" class="form__btn">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- end comments -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- end content tabs -->
+        </div>
+
+        <div th:replace="~{/commons/sidebar :: sidebar}"></div>
+    </div>
+</div>
+</section>
+
+<!-- end content -->
+
+<div th:replace="~{/commons/footer :: footer}"></div>
+
 </body>
+
 </html>

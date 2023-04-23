@@ -95,4 +95,8 @@ public class ItemService extends CrudService<Item> {
         Pageable topThree = PageRequest.of(0, 4);
         return repository.findTop3ItemsWithMostComments(topThree);
     }
+
+    public List<Item> findTwoRandomItems(){
+        return repository.findTwoRandomItems();
+    }
 }

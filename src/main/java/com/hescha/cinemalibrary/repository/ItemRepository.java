@@ -38,4 +38,6 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
 
     @Query("SELECT i FROM Item i LEFT JOIN i.comments c GROUP BY i ORDER BY COUNT(c) DESC, i.id ASC")
     List<Item> findTop3ItemsWithMostComments(Pageable pageable);
+    @Query(value = "SELECT * FROM Item ORDER BY RAND() LIMIT 2", nativeQuery = true)
+    List<Item> findTwoRandomItems();
 }
