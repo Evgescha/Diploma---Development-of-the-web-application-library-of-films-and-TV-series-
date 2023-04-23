@@ -2,117 +2,13 @@
 <html lang="en">
 
 <head>
-	<title>Details1</title>
+	<title>Details 2</title>
 	<div th:replace="~{/commons/head :: head}"></div>
 </head>
 <body class="body">
-	
-	<!-- header -->
-	<header class="header">
-		<div class="header__wrap">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="header__content">
-							<!-- header logo -->
-							<a href="index" class="header__logo">
-								<img src="/img/logo.svg" alt="">
-							</a>
-							<!-- end header logo -->
 
-							<!-- header nav -->
-							<ul class="header__nav">
-								<!-- dropdown -->
-								<li class="header__nav-item">
-									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
 
-									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuHome">
-										<li><a href="index">Home slideshow bg</a></li>
-										<li><a href="index2">Home static bg</a></li>
-									</ul>
-								</li>
-								<!-- end dropdown -->
-
-								<!-- dropdown -->
-								<li class="header__nav-item">
-									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
-
-									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuCatalog">
-										<li><a href="catalog1">Catalog Grid</a></li>
-										<li><a href="catalog2">Catalog List</a></li>
-										<li><a href="details1">Details Movie</a></li>
-										<li><a href="details2">Details TV Series</a></li>
-									</ul>
-								</li>
-								<!-- end dropdown -->
-
-								<li class="header__nav-item">
-									<a href="pricing" class="header__nav-link">Pricing Plan</a>
-								</li>
-
-								<li class="header__nav-item">
-									<a href="faq" class="header__nav-link">Help</a>
-								</li>
-
-								<!-- dropdown -->
-								<li class="dropdown header__nav-item">
-									<a class="dropdown-toggle header__nav-link header__nav-link--more" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-more"></i></a>
-
-									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuMore">
-										<li><a href="about">About</a></li>
-										<li><a href="signin">Sign In</a></li>
-										<li><a href="signup">Sign Up</a></li>
-										<li><a href="404">404 Page</a></li>
-									</ul>
-								</li>
-								<!-- end dropdown -->
-							</ul>
-							<!-- end header nav -->
-
-							<!-- header auth -->
-							<div class="header__auth">
-								<button class="header__search-btn" type="button">
-									<i class="icon ion-ios-search"></i>
-								</button>
-
-								<a href="signin" class="header__sign-in">
-									<i class="icon ion-ios-log-in"></i>
-									<span>sign in</span>
-								</a>
-							</div>
-							<!-- end header auth -->
-
-							<!-- header menu btn -->
-							<button class="header__btn" type="button">
-								<span></span>
-								<span></span>
-								<span></span>
-							</button>
-							<!-- end header menu btn -->
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- header search -->
-		<form action="#" class="header__search">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div class="header__search-content">
-							<input type="text" placeholder="Search for a movie, TV Series that you are looking for">
-
-							<button type="button">search</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</form>
-		<!-- end header search -->
-	</header>
-	<!-- end header -->
-
+<div th:replace="~{/commons/header :: header}"></div>
 	<!-- details -->
 	<section class="section details">
 		<!-- details background -->
@@ -129,11 +25,11 @@
 				<!-- end title -->
 
 				<!-- content -->
-				<div class="col-12 col-xl-6">
-					<div class="card card--details">
+				<div class="col-10">
+					<div class="card card--details card--series">
 						<div class="row">
 							<!-- card cover -->
-							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+							<div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-3">
 								<div class="card__cover">
 									<img src="/img/covers/cover.jpg" alt="">
 								</div>
@@ -141,7 +37,7 @@
 							<!-- end card cover -->
 
 							<!-- card content -->
-							<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+							<div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-9">
 								<div class="card__content">
 									<div class="card__wrap">
 										<span class="card__rate"><i class="icon ion-ios-star"></i>8.4</span>
@@ -161,7 +57,7 @@
 									</ul>
 
 									<div class="card__description card__description--details">
-										It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.
+										It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 									</div>
 								</div>
 							</div>
@@ -190,6 +86,236 @@
 					</video>
 				</div>
 				<!-- end player -->
+
+				<!-- accordion -->
+				<div class="col-12 col-xl-6">
+					<div class="accordion" id="accordion">
+						<div class="accordion__card">
+							<div class="card-header" id="headingOne">
+								<button type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+									<span>Season: 1</span>
+									<span>22 Episodes from Nov, 2004 until May, 2005</span>
+								</button>
+							</div>
+
+							<div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+								<div class="card-body">
+									<table class="accordion__list">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Title</th>
+												<th>Air Date</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<th>1</th>
+												<td>Pilot</td>
+												<td>Tuesday, November 16th, 2004</td>
+											</tr>
+											<tr>
+												<th>2</th>
+												<td>Paternity</td>
+												<td>Tuesday, November 23rd, 2004</td>
+											</tr>
+											<tr>
+												<th>3</th>
+												<td>Occam's Razor</td>
+												<td>Tuesday, November 30th, 2004</td>
+											</tr>
+											<tr>
+												<th>4</th>
+												<td>Maternity</td>
+												<td>Tuesday, December 7th, 2004</td>
+											</tr>
+											<tr>
+												<th>5</th>
+												<td>Damned If You Do</td>
+												<td>Tuesday, December 14th, 2004</td>
+											</tr>
+											<tr>
+												<th>6</th>
+												<td>The Socratic Method</td>
+												<td>Tuesday, December 21st, 2004</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion__card">
+							<div class="card-header" id="headingTwo">
+								<button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+									<span>Season: 2</span>
+									<span>24 Episodes from Sep, 2005 until May, 2006</span>
+								</button>
+							</div>
+
+							<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+								<div class="card-body">
+									<table class="accordion__list">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Title</th>
+												<th>Air Date</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<th>1</th>
+												<td>Pilot</td>
+												<td>Tuesday, November 16th, 2004</td>
+											</tr>
+											<tr>
+												<th>2</th>
+												<td>Paternity</td>
+												<td>Tuesday, November 23rd, 2004</td>
+											</tr>
+											<tr>
+												<th>3</th>
+												<td>Occam's Razor</td>
+												<td>Tuesday, November 30th, 2004</td>
+											</tr>
+											<tr>
+												<th>4</th>
+												<td>Maternity</td>
+												<td>Tuesday, December 7th, 2004</td>
+											</tr>
+											<tr>
+												<th>5</th>
+												<td>Damned If You Do</td>
+												<td>Tuesday, December 14th, 2004</td>
+											</tr>
+											<tr>
+												<th>6</th>
+												<td>The Socratic Method</td>
+												<td>Tuesday, December 21st, 2004</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion__card">
+							<div class="card-header" id="headingThree">
+								<button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+									<span>Season: 3</span>
+									<span>24 Episodes from Sep, 2006 until May, 2007</span>
+								</button>
+							</div>
+
+							<div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+								<div class="card-body">
+									<table class="accordion__list">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Title</th>
+												<th>Air Date</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<th>1</th>
+												<td>Pilot</td>
+												<td>Tuesday, November 16th, 2004</td>
+											</tr>
+											<tr>
+												<th>2</th>
+												<td>Paternity</td>
+												<td>Tuesday, November 23rd, 2004</td>
+											</tr>
+											<tr>
+												<th>3</th>
+												<td>Occam's Razor</td>
+												<td>Tuesday, November 30th, 2004</td>
+											</tr>
+											<tr>
+												<th>4</th>
+												<td>Maternity</td>
+												<td>Tuesday, December 7th, 2004</td>
+											</tr>
+											<tr>
+												<th>5</th>
+												<td>Damned If You Do</td>
+												<td>Tuesday, December 14th, 2004</td>
+											</tr>
+											<tr>
+												<th>6</th>
+												<td>The Socratic Method</td>
+												<td>Tuesday, December 21st, 2004</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+
+						<div class="accordion__card">
+							<div class="card-header" id="headingFour">
+								<button class="collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+									<span>Season: 4</span>
+									<span>16 Episodes from Sep, 2007 until May, 2008</span>
+								</button>
+							</div>
+
+							<div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+								<div class="card-body">
+									<table class="accordion__list">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>Title</th>
+												<th>Air Date</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<th>1</th>
+												<td>Pilot</td>
+												<td>Tuesday, November 16th, 2004</td>
+											</tr>
+											<tr>
+												<th>2</th>
+												<td>Paternity</td>
+												<td>Tuesday, November 23rd, 2004</td>
+											</tr>
+											<tr>
+												<th>3</th>
+												<td>Occam's Razor</td>
+												<td>Tuesday, November 30th, 2004</td>
+											</tr>
+											<tr>
+												<th>4</th>
+												<td>Maternity</td>
+												<td>Tuesday, December 7th, 2004</td>
+											</tr>
+											<tr>
+												<th>5</th>
+												<td>Damned If You Do</td>
+												<td>Tuesday, December 14th, 2004</td>
+											</tr>
+											<tr>
+												<th>6</th>
+												<td>The Socratic Method</td>
+												<td>Tuesday, December 21st, 2004</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end accordion -->
 
 				<div class="col-12">
 					<div class="details__wrap">
@@ -772,6 +898,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
