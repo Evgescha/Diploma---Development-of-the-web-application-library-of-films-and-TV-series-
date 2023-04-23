@@ -2,8 +2,7 @@ package com.hescha.cinemalibrary.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +16,14 @@ public class Item extends AbstractEntity{
     private Integer seriesCount;
     private Integer releaseYear;
     private String image;
-    @OneToMany
+    @ManyToMany
+    @JoinTable(
+            name = "Item_Genres",
+            joinColumns = @JoinColumn(name = "ITEM_ID"),
+            inverseJoinColumns = @JoinColumn(name = "GENRES_ID")
+    )
     private List<Genre> genres = new ArrayList<>();
+
     @OneToMany
     private List<Comment> comments = new ArrayList<>();
 
