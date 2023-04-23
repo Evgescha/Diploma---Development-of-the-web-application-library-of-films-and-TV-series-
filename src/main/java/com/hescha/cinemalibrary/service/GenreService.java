@@ -22,15 +22,6 @@ public class GenreService extends CrudService<Genre> {
         this.repository = repository;
     }
 
-    public List<Genre> findByName(String name) {
-        return repository.findByName(name);
-    }
-
-    public List<Genre> findByNameContains(String name) {
-        return repository.findByNameContains(name);
-    }
-
-
     public Genre update(Long id, Genre entity) {
         Genre read = read(id);
         if (read == null) {
