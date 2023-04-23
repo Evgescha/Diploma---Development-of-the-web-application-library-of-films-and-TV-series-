@@ -97,7 +97,7 @@
                 </div>
             </div>
 
-            <div>
+            <div th:if="${#request.isUserInRole('ADMIN')}">
                 <a th:href="@{/item/edit/{id}(id=${entity.id})}" class="form__btn">Edit</a>
                 <form th:if="${entity.id!=null}" method="get"
                       th:action="'/item/'

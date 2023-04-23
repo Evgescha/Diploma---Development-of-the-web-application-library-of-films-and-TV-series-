@@ -37,7 +37,7 @@
                                 <p class="card-text">Name: <span th:text="${entity.firstname + ' ' + entity.lastname}">First Last</span></p>
                                 <p class="card-text">Email: <span th:text="${entity.email}">example@example.com</span></p>
 
-                                <a th:href="'/user/edit/'+${entity.id}" class="filter__btn">Edit Profile</a>
+                                <a th:href="'/user/edit/'+${entity.id}" class="filter__btn" th:if="${#request.isUserInRole('ADMIN') or #authentication.getName().equalsIgnoreCase(entity.username)}">Edit Profile</a>
                             </div>
                         </div>
                     </div>

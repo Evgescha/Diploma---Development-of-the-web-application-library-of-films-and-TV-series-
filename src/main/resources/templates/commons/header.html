@@ -32,13 +32,13 @@
               <li class="header__nav-item">
                 <a href="/about" class="header__nav-link">About</a>
               </li>
-              <li class="header__nav-item">
-                <a href="/genre" class="header__nav-link">Genres</a>
-              </li>
-              <li class="header__nav-item">
+              <li class="header__nav-item" th:if="${#request.userPrincipal != null}">
                 <a href="/user/profile" class="header__nav-link">Profile</a>
               </li>
-              <li class="header__nav-item">
+              <li class="header__nav-item" th:if="${#request.isUserInRole('ADMIN')}">
+                <a href="/genre" class="header__nav-link">Genres</a>
+              </li>
+              <li class="header__nav-item" th:if="${#request.isUserInRole('ADMIN')}">
                 <a href="/user" class="header__nav-link">Users</a>
               </li>
               <li class="header__nav-item" th:if="${#request.userPrincipal != null}">
