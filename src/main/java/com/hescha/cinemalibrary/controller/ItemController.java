@@ -55,10 +55,8 @@ public class ItemController {
         } else {
             model.addAttribute("entity", service.read(id));
         }
-
-        model.addAttribute("itemType_list", ItemType.values());
-        model.addAttribute("genre_list", genreService.readAll());
-        model.addAttribute("comment_list", commentService.readAll());
+        model.addAttribute("itemTypes", ItemType.values());
+        model.addAttribute("genres", genreService.readAll());
 
         return THYMELEAF_TEMPLATE_EDIT_PAGE;
     }

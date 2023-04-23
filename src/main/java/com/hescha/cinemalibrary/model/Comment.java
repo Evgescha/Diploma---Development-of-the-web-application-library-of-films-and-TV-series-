@@ -26,4 +26,15 @@ public class Comment extends AbstractEntity{
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy, HH:mm");
         return created.format(formatter);
     }
+
+    @Override
+    public String
+    toString() {
+        return "Comment{" +
+                "owner=" + owner.getUsername() +
+                ", item=" + item.id +
+                ", created=" + created +
+                ", message='" + message + '\'' +
+                '}';
+    }
 }

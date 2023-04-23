@@ -3711,3 +3711,8 @@ html:not([dir="rtl"]) .noUi-horizontal .noUi-handle {
   background-image: -ms-linear-gradient(180deg, #ff55a5 0%, #ff5860 100%);
   background-image: linear-gradient(180deg, #ff55a5 0%, #ff5860 100%);
 }
+
+
+.editItem{
+  color: white;
+}
