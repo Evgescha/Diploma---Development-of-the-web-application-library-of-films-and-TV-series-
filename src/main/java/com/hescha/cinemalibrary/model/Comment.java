@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 public class Comment extends AbstractEntity{
     @ManyToOne
     private User owner;
+    @ManyToOne
+    private Item item;
     private LocalDateTime created;
     private String message;
 }

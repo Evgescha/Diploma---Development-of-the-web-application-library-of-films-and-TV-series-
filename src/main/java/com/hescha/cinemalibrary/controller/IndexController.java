@@ -1,14 +1,22 @@
 package com.hescha.cinemalibrary.controller;
 
+import com.hescha.cinemalibrary.service.ItemService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class IndexController {
+    private final ItemService service;
+
     @GetMapping
-    public String getPage() {
+    public String getPage(Model model) {
+        model.addAttribute("list", service.readAll());
+        model.addAttribute("topList", service.readTop3Commented());
         return "index";
     }
 

@@ -24,7 +24,7 @@ public class Item extends AbstractEntity{
     )
     private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "item")
     private List<Comment> comments = new ArrayList<>();
 
 }
