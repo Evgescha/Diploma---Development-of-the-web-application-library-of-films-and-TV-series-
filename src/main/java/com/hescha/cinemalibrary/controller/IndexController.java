@@ -31,4 +31,14 @@ public class IndexController {
     public String getPage404() {
         return "404";
     }
+
+    @GetMapping("/catalog")
+    public String catalog() {
+        return "catalog";
+    }
+
+    @GetMapping("/details")
+    public String details() {
+        return "details";
+    }
 }
