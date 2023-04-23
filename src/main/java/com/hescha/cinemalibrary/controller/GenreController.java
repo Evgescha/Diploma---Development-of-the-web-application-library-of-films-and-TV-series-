@@ -1,12 +1,10 @@
 package com.hescha.cinemalibrary.controller;
 
 import com.hescha.cinemalibrary.model.Genre;
-import com.hescha.cinemalibrary.model.Genre;
 import com.hescha.cinemalibrary.service.GenreService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +21,6 @@ public class GenreController {
     public static final String CURRENT_ADDRESS = "/" + API_PATH;
     public static final String MESSAGE = "message";
     public static final String THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE = API_PATH;
-    public static final String THYMELEAF_TEMPLATE_ONE_ITEM_PAGE = THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE + "-one";
     public static final String THYMELEAF_TEMPLATE_EDIT_PAGE = THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE + "-edit";
     public static final String REDIRECT_TO_ALL_ITEMS = "redirect:" + CURRENT_ADDRESS;
 
@@ -36,12 +33,6 @@ public class GenreController {
         return THYMELEAF_TEMPLATE_ALL_ITEMS_PAGE;
     }
 
-    @GetMapping("/{id}")
-    public String read(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("entity", service.read(id));
-        return THYMELEAF_TEMPLATE_ONE_ITEM_PAGE;
-    }
-
     @GetMapping(path = {"/edit", "/edit/{id}"})
     public String editPage(Model model, @PathVariable(name = "id", required = false) Long id) {
         if (id == null) {
@@ -49,8 +40,6 @@ public class GenreController {
         } else {
             model.addAttribute("entity", service.read(id));
         }
-
-
         return THYMELEAF_TEMPLATE_EDIT_PAGE;
     }
 
@@ -60,12 +49,10 @@ public class GenreController {
             try {
                 Genre createdEntity = service.create(entity);
                 ra.addFlashAttribute(MESSAGE, "Creating is successful");
-                return REDIRECT_TO_ALL_ITEMS + "/" + createdEntity.getId();
             } catch (Exception e) {
                 ra.addFlashAttribute(MESSAGE, "Creating failed");
                 e.printStackTrace();
             }
-            return REDIRECT_TO_ALL_ITEMS;
         } else {
             try {
                 service.update(entity.getId(), entity);
@@ -74,8 +61,8 @@ public class GenreController {
                 e.printStackTrace();
                 ra.addFlashAttribute(MESSAGE, "Editing failed");
             }
-            return REDIRECT_TO_ALL_ITEMS + "/" + entity.getId();
         }
+        return REDIRECT_TO_ALL_ITEMS;
     }
 
     @GetMapping("/{id}/delete")

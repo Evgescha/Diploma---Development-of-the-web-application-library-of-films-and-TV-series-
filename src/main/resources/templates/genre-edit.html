@@ -3,23 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Edit Genre</title>
+    <div th:replace="~{/commons/head :: head}"></div>
 </head>
 <body>
-<h1>Edit Genre</h1>
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<form th:action="@{/genre}" th:object="${entity}" method="post">
+<div th:replace="~{/commons/header :: header}"></div>
 
-    <p>
-        <label for="name">name:</label>
-            <input type="text" th:field="*{name}" id="name" required>
-        </p>
-
-    <p>
-        <input type="text" th:field="*{id}" id="id">
-        <input type="submit" value="Save">
-        <a th:href="@{/genre}">Cancel</a>
-    </p>
-</form>
-
+<div class="container pt-5 mt-5 section" >
+    <div class="col-12 content__head">
+        <h2 class="content__title d-flex justify-content-center mt-5">Edit Genre</h2>
+    </div>
+    <div class="row justify-content-center" style="color: white">
+        <div class="col-12 col-lg-8 col-xl-8">
+            <div class="tab-content">
+                <div class="tab-pane fade show active">
+                    <form th:action="@{/genre}" th:object="${entity}" method="post" class="form">
+                        <input type="text" th:field="*{id}" id="id" hidden>
+                        <div class="form-group">
+                            <label for="name">Name:</label>
+                            <input type="text" th:field="*{name}" id="name" class="form__input" placeholder="Name"
+                                   required>
+                        </div>
+                        <div class="form-group d-flex justify-content-around">
+                            <button type="submit" class="form__btn">Save</button>
+                            <a href="/genre" class="form__btn">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
 </html>
