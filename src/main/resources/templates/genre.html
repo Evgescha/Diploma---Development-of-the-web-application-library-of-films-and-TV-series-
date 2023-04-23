@@ -3,34 +3,49 @@
 <head>
     <title>List of Genre</title>
     <meta charset="UTF-8">
+    <div th:replace="~{/commons/head :: head}"></div>
 </head>
 <body>
-<h1>List of Genre</h1>
-<h3 th:if="${message != null}" th:text="${message}">Message</h3>
-<a th:href="@{/genre/edit}">Create new Genre</a>
-<table>
-    <thead>
-    <tr>
-        <th>name</th>
+<div th:replace="~{/commons/header :: header}"></div>
 
-        <th>Action</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr th:each="entity : ${list}">
-                                    <td th:text=${entity.name}></td>
-                
-        <td>
-            <a th:href="@{/genre/{id}(id=${entity.id})}">See detail</a>
-            <a th:href="@{/genre/edit/{id}(id=${entity.id})}">Edit</a>
-            <form th:if="${entity.id!=null}" method="get"
-                  th:action="'/genre/'
-                  +${entity.id}+'/delete'">
-                <input type="submit" value="Delete" onclick="return confirm('Are you sure?')">
-            </form>
-        </td>
-    </tr>
-    </tbody>
-</table>
+
+<div class="container pt-5 mt-5 section" style="color: white">
+    <div class="col-12 content__head">
+        <h2 class="content__title d-flex justify-content-center mt-5">Genres</h2>
+    </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-12">
+                <h3 th:if="${message != null}" th:text="${message}">Message</h3>
+                <a th:href="@{/genre/edit}" class="form__btn">Create new Genre</a>
+                <div class="table-responsive d-flex justify-content-center">
+                    <table class="table" style="width: 100%">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="entity : ${list}">
+                            <td th:text="${entity.name}"></td>
+
+                            <td class="d-flex justify-content-around">
+                                <a th:href="@{/genre/edit/{id}(id=${entity.id})}" class="form__btn">Edit</a>
+                                <form th:if="${entity.id!=null}" method="get"
+                                      th:action="'/genre/'
+                                      +${entity.id}+'/delete'">
+                                    <input type="submit" value="Delete" class="form__btn btn-dangerous" onclick="return confirm('Are you sure?')">
+                                </form>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="~{/commons/footer :: footer}"></div>
 </body>
 </html>
