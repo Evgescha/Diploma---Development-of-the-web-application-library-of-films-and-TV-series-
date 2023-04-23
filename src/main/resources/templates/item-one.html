@@ -33,7 +33,7 @@
                             <div class="card__cover">
                                 <img th:src="${entity.image}" src="/img/covers/cover.jpg" alt="">
                             </div>
-                            <div class="manageList">
+                            <div class="manageList"th:if="${#request.userPrincipal != null and !#request.isUserInRole('ADMIN')}">
                                 <div class="filter__item">
                                     <span class="filter__item-label">List:</span>
 
@@ -129,14 +129,14 @@
                             <div class="reviews">
                                 <ul class="reviews__list">
                                     <li class="reviews__item" th:each="comment : ${entity.comments}">
-                                        <div class="reviews__autor">
+                                        <a th:href="'/user/'+${comment.owner.id}" class="reviews__autor">
                                             <img class="reviews__avatar" th:src="${comment.owner.image}" alt="">
                                             <span class="reviews__name"
                                                   th:text="${comment.owner!=null?comment.owner.username:''}">Best Marvel movie in my opinion</span>
                                             <span class="reviews__time"
                                                   th:text="${comment.getFormattedCreated()} + ' by ' + ${comment.owner!=null?comment.owner.username:''}">24.08.2018, 17:53 by John Doe</span>
 
-                                        </div>
+                                        </a>
                                         <p class="reviews__text" th:text="${comment.message}">There are many variations of passages of Lorem
                                             Ipsum available, but the majority have suffered alteration in some form,
                                             by injected humour, or randomised words which don't look even slightly
@@ -146,7 +146,7 @@
                                     </li>
                                 </ul>
 
-                                <form action="/comment" class="form" method="post">
+                                <form action="/comment" class="form" method="post" th:if="${#request.userPrincipal != null and !#request.isUserInRole('ADMIN')}">
                                     <input type="text" class="form__input" placeholder="Title" hidden th:value="${entity.id}" name="itemId">
                                     <textarea class="form__textarea" placeholder="Review" required name="message"></textarea>
                                     <button type="submit" class="form__btn">Send</button>

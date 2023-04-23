@@ -1,6 +1,7 @@
 package com.hescha.cinemalibrary.model;
 
 import lombok.Data;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class Item extends AbstractEntity{
     )
     private List<Genre> genres = new ArrayList<>();
 
-    @OneToMany(mappedBy = "item")
+    @OneToMany(mappedBy = "item", cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<Comment> comments = new ArrayList<>();
 
 }

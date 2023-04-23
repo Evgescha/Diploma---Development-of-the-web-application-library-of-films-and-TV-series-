@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NonNull;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -23,13 +20,16 @@ public class User extends AbstractEntity {
     private String lastname;
     private String email;
     private String image = "/img/user.png";
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Item> favouritesItems = new HashSet();
-    @ManyToMany
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Item> featureItems = new HashSet();
-    @ManyToMany
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Item> inprogresItems = new HashSet();
-    @ManyToMany
+
+    @ManyToMany(cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Item> watchedItems = new HashSet<>();
     @ManyToMany
     private Set<Role> roles = new HashSet();

@@ -32,7 +32,7 @@
               <li class="header__nav-item">
                 <a href="/about" class="header__nav-link">About</a>
               </li>
-              <li class="header__nav-item" th:if="${#request.userPrincipal != null}">
+              <li class="header__nav-item" th:if="${#request.userPrincipal != null and !#request.isUserInRole('ADMIN')}">
                 <a href="/user/profile" class="header__nav-link">Profile</a>
               </li>
               <li class="header__nav-item" th:if="${#request.isUserInRole('ADMIN')}">

@@ -1,5 +1,6 @@
 package com.hescha.cinemalibrary.service;
 
+import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.User;
 import com.hescha.cinemalibrary.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -139,5 +141,17 @@ public class UserService extends CrudService<User>
             throw new UsernameNotFoundException("User " + username + " not found");
         }
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), List.of());
+    }
+
+    @Transactional
+    public void removeItemFromUserLists(Item item) {
+        List<User> users = repository.findAll();
+        for (User user : users) {
+            user.getFavouritesItems().remove(item);
+            user.getFeatureItems().remove(item);
+            user.getInprogresItems().remove(item);
+            user.getWatchedItems().remove(item);
+            repository.save(user);
+        }
     }
 }

@@ -4,10 +4,7 @@ import com.hescha.cinemalibrary.model.Genre;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.Item;
 import com.hescha.cinemalibrary.model.ItemType;
-import com.hescha.cinemalibrary.service.CommentService;
-import com.hescha.cinemalibrary.service.GenreService;
-import com.hescha.cinemalibrary.service.ItemService;
-import com.hescha.cinemalibrary.service.SecurityService;
+import com.hescha.cinemalibrary.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -31,9 +28,8 @@ public class ItemController {
     public static final String REDIRECT_TO_ALL_ITEMS = "redirect:" + CURRENT_ADDRESS;
 
     private final ItemService service;
-
+    private final UserService userService;
     private final GenreService genreService;
-    private final CommentService commentService;
     private final SecurityService securityService;
 
     @GetMapping
@@ -116,6 +112,8 @@ public class ItemController {
     @GetMapping("/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes ra) {
         try {
+            Item item = service.read(id);
+            userService.removeItemFromUserLists(item);
             service.delete(id);
             ra.addFlashAttribute(MESSAGE, "Removing is successful");
         } catch (Exception e) {
